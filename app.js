@@ -1,5 +1,2 @@
-function sayName(name){
-    console.log('Welcome ' + name);
-}
-
-sayName('Yuxin');
+const express = require('express');
+express();
