@@ -1,5 +1,6 @@
 const express = require('express');
 const app = express();
+app.use(express.json());
 
 const coursesSavedInCode = [
     { id: 1, name: "cutie1"},
@@ -7,6 +8,9 @@ const coursesSavedInCode = [
     { id: 3, name: "cutie3"},
 ]
 
+// ============
+// Get Requests
+// ============
 app.get('/', (req, res) => {
     res.send('Baby Yummy Whoo hooo x');
 });
@@ -22,6 +26,22 @@ app.get('/api/courses/:id', (req, res) => {
     }
     res.send(course);
 });
+
+
+// =============
+// Post Requests
+// =============
+app.post('/api/courses', (req, res) => {
+    // Create a new course and push into course array
+    const course = {
+        id: coursesSavedInCode.length + 1,
+        name: req.body.name // passing of JSON is required
+    };
+    coursesSavedInCode.push(course);
+    res.send(course);
+})
+
+
 
 // PORT 
 const port = process.env.PORT || 3000;
