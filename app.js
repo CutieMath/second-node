@@ -1,3 +1,4 @@
+const Joi = require('joi');
 const express = require('express');
 const app = express();
 app.use(express.json());
@@ -32,6 +33,12 @@ app.get('/api/courses/:id', (req, res) => {
 // Post Requests
 // =============
 app.post('/api/courses', (req, res) => {
+    const schema = Joi.object({
+        name: Joi.string().min(3).required()
+    });
+    const validation = schema.validate(req.body);
+    console.log(validation);
+
     // Create a new course and push into course array
     const course = {
         id: coursesSavedInCode.length + 1,
