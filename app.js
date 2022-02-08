@@ -37,7 +37,10 @@ app.post('/api/courses', (req, res) => {
         name: Joi.string().min(3).required()
     });
     const validation = schema.validate(req.body);
-    console.log(validation);
+    if(validation.error){
+        res.status(400).send(validation.error.details[0].message)
+        return;
+    }
 
     // Create a new course and push into course array
     const course = {
