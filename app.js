@@ -33,13 +33,10 @@ app.get('/api/courses/:id', (req, res) => {
 // Post Requests
 // =============
 app.post('/api/courses', (req, res) => {
-    const schema = Joi.object({
-        name: Joi.string().min(3).required()
-    });
-    const validation = schema.validate(req.body);
-    if(validation.error){
-        res.status(400).send(validation.error.details[0].message)
-        return;
+    const { error } = validateCourse(req.body);
+    if(error){ 
+        res.status(400).send(error); 
+        return; 
     }
 
     // Create a new course and push into course array
@@ -49,8 +46,38 @@ app.post('/api/courses', (req, res) => {
     };
     coursesSavedInCode.push(course);
     res.send(course);
-})
+});
 
+
+
+// =============
+// Put Requests
+// =============
+app.put('/api/courses/:id', (req, res) => {
+    // 1. Check if the resource exist
+    let course = coursesSavedInCode.find(c => c.id === parseInt(req.params.id));
+    if (!course){ res.status(404).send("The course was not found") }
+   
+    // 2. Input validation
+    const { error } = validateCourse(req.body);
+    if(error){ 
+        res.status(400).send(error); 
+        return; 
+    }
+
+    // 3. Update the course
+    course.name = req.body.name;
+    res.send(course);
+});
+
+
+function validateCourse(course){
+    const schema = Joi.object({
+        id: Joi.required(),
+        name: Joi.string().min(3).required()
+    });
+    return schema.validate(course);
+}
 
 
 // PORT 
