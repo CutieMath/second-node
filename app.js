@@ -13,7 +13,7 @@ const coursesSavedInCode = [
 // Get Requests
 // ============
 app.get('/', (req, res) => {
-    res.send('Baby Yummy Whoo hooo x');
+    res.send('Yummy Yummy x');
 });
 
 app.get('/api/courses', (req, res) => {
@@ -33,7 +33,7 @@ app.get('/api/courses/:id', (req, res) => {
 // Post Requests
 // =============
 app.post('/api/courses', (req, res) => {
-    const { error } = validateCourse(req.body);
+    const { error } = validateCourseAdd(req.body);
     if(error){ 
         res.status(400).send(error); 
         return; 
@@ -59,7 +59,7 @@ app.put('/api/courses/:id', (req, res) => {
     if (!course){ res.status(404).send("The course was not found") }
    
     // 2. Input validation
-    const { error } = validateCourse(req.body);
+    const { error } = validateCourseUpdate(req.body);
     if(error){ 
         res.status(400).send(error); 
         return; 
@@ -71,7 +71,14 @@ app.put('/api/courses/:id', (req, res) => {
 });
 
 
-function validateCourse(course){
+function validateCourseUpdate(course){
+    const schema = Joi.object({
+        name: Joi.string().min(3).required()
+    });
+    return schema.validate(course);
+}
+
+function validateCourseAdd(course){
     const schema = Joi.object({
         id: Joi.required(),
         name: Joi.string().min(3).required()
