@@ -24,6 +24,7 @@ app.get('/api/courses/:id', (req, res) => {
     let course = coursesSavedInCode.find(c => c.id === parseInt(req.params.id));
     if (!course){
         res.status(404).send("The course was not found")
+        return;
     }
     res.send(course);
 });
