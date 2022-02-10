@@ -74,6 +74,27 @@ app.put('/api/courses/:id', (req, res) => {
 });
 
 
+// =============
+// Delete Requests
+// ===============
+app.delete('/api/courses/:id', (req, res) => {
+    // 1. Check if the resource exist
+    const course = coursesSavedInCode.find(c => c.id === parseInt(req.params.id));
+    if (!course){ 
+        res.status(404).send("The course was not found") 
+        return;
+    }
+
+    // 2. Delete the resource
+    const index = coursesSavedInCode.indexOf(course);
+    coursesSavedInCode.splice(index, 1);
+
+    // 3. Return 
+    res.send(course);
+});
+
+
+
 function validateCourseUpdate(course){
     const schema = Joi.object({
         name: Joi.string().min(3).required()
@@ -88,7 +109,6 @@ function validateCourseAdd(course){
     });
     return schema.validate(course);
 }
-
 
 // PORT 
 const port = process.env.PORT || 3000;
