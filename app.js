@@ -56,7 +56,10 @@ app.post('/api/courses', (req, res) => {
 app.put('/api/courses/:id', (req, res) => {
     // 1. Check if the resource exist
     let course = coursesSavedInCode.find(c => c.id === parseInt(req.params.id));
-    if (!course){ res.status(404).send("The course was not found") }
+    if (!course){ 
+        res.status(404).send("The course was not found") 
+        return;
+    }
    
     // 2. Input validation
     const { error } = validateCourseUpdate(req.body);
