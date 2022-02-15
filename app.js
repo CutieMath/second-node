@@ -1,7 +1,11 @@
 const Joi = require('joi');
+const logger = require('./logger') // from local module
 const express = require('express');
 const app = express();
+
 app.use(express.json());
+app.use(logger); // use the local module
+
 
 const coursesSavedInCode = [
     { id: 1, name: "cutie1"},
