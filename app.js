@@ -1,11 +1,21 @@
+const morgan = require('morgan');
+const helmet = require('helmet');
 const Joi = require('joi');
 const logger = require('./logger') // from local module
 const express = require('express');
 const app = express();
 
 app.use(express.json());
-app.use(logger); // use the local module
+
+// use middleware from local module
+app.use(logger); 
+// use built-in middleware
 app.use(express.static('public'));
+// use third party middleware
+app.use(helmet()); // secure HTTP request
+app.use(morgan('tiny')); // log the http request
+
+
 
 const coursesSavedInCode = [
     { id: 1, name: "cutie1"},
