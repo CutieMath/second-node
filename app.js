@@ -5,7 +5,7 @@ const app = express();
 
 app.use(express.json());
 app.use(logger); // use the local module
-
+app.use(express.static('public'));
 
 const coursesSavedInCode = [
     { id: 1, name: "cutie1"},

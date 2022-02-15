@@ -1,0 +1,1 @@
+Test built-in middleware for Static page xx
