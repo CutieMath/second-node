@@ -13,8 +13,14 @@ app.use(logger);
 app.use(express.static('public'));
 // use third party middleware
 app.use(helmet()); // secure HTTP request
-app.use(morgan('tiny')); // log the http request
+// app.use(morgan('tiny')); // log the http request
 
+
+// use environment variables
+if (app.get('env') === 'development'){
+    app.use(morgan('tiny'));
+    console.log('Morgan enabled...');
+}
 
 
 const coursesSavedInCode = [
