@@ -1,0 +1,6 @@
+{
+    "name": "My Learning App - DEV",
+    "mail":{
+        "host": "dev_mail_server"
+    }
+}

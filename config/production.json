@@ -1,0 +1,6 @@
+{
+    "name": "My Learning App - PROD",
+    "mail":{
+        "host": "prod_mail_server"
+    }
+}

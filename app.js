@@ -1,3 +1,5 @@
+
+const config = require('config');
 const morgan = require('morgan');
 const helmet = require('helmet');
 const Joi = require('joi');
@@ -14,6 +16,10 @@ app.use(express.static('public'));
 // use third party middleware
 app.use(helmet()); // secure HTTP request
 // app.use(morgan('tiny')); // log the http request
+
+
+// Configuration 
+console.log('Application Name' + config.get('name'));
 
 
 // use environment variables
