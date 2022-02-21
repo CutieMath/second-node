@@ -17,6 +17,7 @@ app.use(helmet()); // secure HTTP request
 
 
 // use environment variables
+// process.env.NODE_ENV = app.get('env')
 if (app.get('env') === 'development'){
     app.use(morgan('tiny'));
     console.log('Morgan enabled...');
