@@ -19,7 +19,9 @@ app.use(helmet()); // secure HTTP request
 
 
 // Configuration 
-console.log('Application Name' + config.get('name'));
+console.log('Application Name: ' + config.get('name'));
+console.log('Mail Server: ' + config.get('mail.host'));
+console.log('Mail Server: ' + config.get('mail.password'));
 
 
 // use environment variables
