@@ -1,4 +1,6 @@
 
+const startupDebugger = require('debug')('app:startup'); // the second is argument
+const dbDebugger = require('debug')('app:db'); // if only one used, can use variable name "debug"
 const config = require('config');
 const morgan = require('morgan');
 const helmet = require('helmet');
@@ -23,13 +25,23 @@ console.log('Application Name: ' + config.get('name'));
 console.log('Mail Server: ' + config.get('mail.host'));
 console.log('Mail Server: ' + config.get('mail.password'));
 
-
 // use environment variables
 // process.env.NODE_ENV = app.get('env')
 if (app.get('env') === 'development'){
     app.use(morgan('tiny'));
-    console.log('Morgan enabled...');
+    // console.log('Morgan enabled...');
+    startupDebugger('Morgan enabled...'); // use the debug package for console.log
 }
+
+// DB debug:
+dbDebugger('Connected to the db...');
+
+// code used to set up which debug we want to use
+// export DEBUG=app:*                  // wild card
+// export DEBUG=app:startup,app:db     // both startup and db
+// export DEBUG=app:startup            // just startup
+// export DEBUG=                       // none
+// DEBUG=app:db nodemon app.js         // short cut to run the app
 
 
 const coursesSavedInCode = [
