@@ -1,5 +1,6 @@
+const Joi = require('joi');
 const express = require('express');
-const router = express.Router()
+const router = express.Router();
 
 const coursesSavedInCode = [
     { id: 1, name: "cutie1"},
