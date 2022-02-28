@@ -9,8 +9,11 @@ const logger = require('./logger') // from local module
 const express = require('express');
 const app = express();
 
-app.use(express.json());
+// HTML Markup
+app.set('view engine', 'pug');
+app.set('views', './views');
 
+app.use(express.json());
 // use middleware from local module
 app.use(logger); 
 // use built-in middleware
@@ -54,7 +57,11 @@ const coursesSavedInCode = [
 // Get Requests
 // ============
 app.get('/', (req, res) => {
-    res.send('Yummy Yummy x');
+    // res.send('Yummy Yummy x');
+    res.render('index', {
+        title: "This is a title",
+        message: "This is a cute message x"
+    })
 });
 
 app.get('/api/courses', (req, res) => {
