@@ -1,10 +1,10 @@
 console.log("Before")
-getUser(1, function(user){
+getUser(1, (user) => {
     // get name
     console.log('User', user);
 
     // get repo
-    getRepo(user.name, function(repo){
+    getRepo(user.name, (repo) => {
         console.log('Repo', repo);
     })
 
