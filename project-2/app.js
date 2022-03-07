@@ -1,6 +1,7 @@
 console.log("Before")
-const user = getUser(1);
-console.log(user);
+getUser(1, function(user){
+    console.log('User', user);
+});
 console.log("After")
 
 // 3 ways to handle Asynchronous code
@@ -9,13 +10,12 @@ console.log("After")
 // - Async/Await
 
 
-function getUser(id){
+function getUser(id, callback){
     setTimeout(() => {
         console.log("Reading from db .. 2 sec!");
-        return {
+        callback({
             id: id, 
             name: 'cutie'
-        };
+        });
     }, 2000) // Schedule time 
-    return 1;
 }
