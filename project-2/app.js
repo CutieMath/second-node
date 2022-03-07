@@ -1,6 +1,13 @@
 console.log("Before")
 getUser(1, function(user){
+    // get name
     console.log('User', user);
+
+    // get repo
+    getRepo(user.name, function(repo){
+        console.log('Repo', repo);
+    })
+
 });
 console.log("After")
 
@@ -8,7 +15,6 @@ console.log("After")
 // - Callbacks
 // - Promises
 // - Async/Await
-
 
 function getUser(id, callback){
     setTimeout(() => {
@@ -18,4 +24,10 @@ function getUser(id, callback){
             name: 'cutie'
         });
     }, 2000) // Schedule time 
+}
+
+function getRepo(name, callback){
+    setTimeout(() => {
+        callback(['repo1', 'repo2', 'repo3']);
+    }, 2000)
 }
