@@ -1,21 +1,26 @@
+// Asynchronous
 console.log("Before")
 getUser(1, (user) => {
-    // get name
-    console.log('User', user);
-
-    // get repo
     getRepo(user.name, (repo) => {
-        console.log('Repo', repo);
-    })
-
+        getCommits(repo, (commits) => {
+            console.log(commits)
+        });
+    });
 });
 console.log("After")
+
+// Synchronous
+console.log("Before");
+const user = getUser(1);
+const repo = getRepo(user.name);
+const commits = getCommits(repo[0]);
+console.log("After");
+
 
 // 3 ways to handle Asynchronous code
 // - Callbacks
 // - Promises
 // - Async/Await
-
 function getUser(id, callback){
     setTimeout(() => {
         console.log("Reading from db .. 2 sec!");
