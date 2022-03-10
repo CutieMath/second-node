@@ -18,17 +18,19 @@
 
 
 // Solution to the callback hell problem
-// 1- Use named function instead of anonymous
-getUser(1, getRepos);
-function getRepos(user){
-    getRepos(user.name, getCommits);
-}
-function getCommits(repos) {
-    getCommits(repos, displayCommits);
-}
-function displayCommits(commits){
-    console.log(commits);
-}
+// 1 - Use named function instead of anonymous
+// getUser(1, getRepos);
+// function getRepos(user){
+//     getRepos(user.name, getCommits);
+// }
+// function getCommits(repos) {
+//     getCommits(repos, displayCommits);
+// }
+// function displayCommits(commits){
+//     console.log(commits);
+// }
+
+// 2 - Promises 
 
 
 
