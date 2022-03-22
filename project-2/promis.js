@@ -1,6 +1,9 @@
 const p = new Promise((resolve, reject) => {
     // Start async work
-    resolve(1);
+    setTimeout(() => {
+        resolve(1);
+    }, 2000);
+    
     // reject(new Error('message'));
 });
 
