@@ -30,8 +30,36 @@
 //     console.log(commits);
 // }
 
-// 2 - Promises 
 
+
+// 2 - Promises 
+function getUserWithPromise(id){
+    return new Promise((resolve, reject) => {
+        setTimeout(() => {
+            console.log("Waiting for 2 sec ~~");
+            resolve({
+                id: id,
+                name: 'cutie'
+            });
+        }, 2000);
+    });
+}
+
+function getRepoWithPromise(name){
+    return new Promise((resolve, reject) => {
+        setTimeout(() => {
+            resolve(['repo1', 'repo2', 'repo3']);
+        }, 2000);
+    });
+}
+
+function getCommitsWithPromise(repos) {
+    return new Promise((resolve, reject) => {
+        setTimeout(() => {
+            resolve(['commit']);
+        }, 2000);
+    });
+}
 
 
 // 3 ways to handle Asynchronous code
