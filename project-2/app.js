@@ -37,12 +37,12 @@ getUserWithPromise(1)
     .then(user => getRepoWithPromise(user.name))
     .then(repos => getCommitsWithPromise(repos[0]))
     .then(commits => console.log('Commits: ', commits))
-    .catch(err => console.log('Error: ', err.message));
+    .catch(err => console.log('Error: ', err.message)); // This handler will catch all the errors in the chain
 
 function getUserWithPromise(id){
     return new Promise((resolve, reject) => {
         setTimeout(() => {
-            console.log("Waiting for 2 sec ~~");
+            console.log("Waiting for 2 sec to get user ~~");
             resolve({
                 id: id,
                 name: 'cutie'
@@ -54,7 +54,7 @@ function getUserWithPromise(id){
 function getRepoWithPromise(name){
     return new Promise((resolve, reject) => {
         setTimeout(() => {
-            console.log("Waiting for 2 sec ~~");
+            console.log("Waiting for 2 sec to get repo ~~");
             resolve(['repo1', 'repo2', 'repo3']);
         }, 2000);
     });
@@ -63,7 +63,7 @@ function getRepoWithPromise(name){
 function getCommitsWithPromise(repos) {
     return new Promise((resolve, reject) => {
         setTimeout(() => {
-            console.log("Waiting for 2 sec ~~");
+            console.log("Waiting for 2 sec to get commits ~~");
             resolve(['commit']);
         }, 2000);
     });
