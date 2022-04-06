@@ -23,7 +23,7 @@ const p2 = new Promise((resolve, reject) => {
 //     .then(res => console.log(res))
 //     .catch(err => console.log("Error: ", err.message))
 
-// If one fulfilled, as soon as the first finish the second one will will be ignored
+// If one fulfilled, as soon as the first finish the second one will be ignored
 Promise.race([p1, p2])
     .then(res => console.log(res))
     .catch(err => console.log("Error: ", err.message))

@@ -18,6 +18,11 @@
 
 
 // Solution to the callback hell problem
+// Three ways to handle Asynchronous code
+// - Callbacks
+// - Promises
+// - Async/Await
+
 // 1 - Use named function instead of anonymous
 // getUser(1, getRepos);
 // function getRepos(user){
@@ -33,13 +38,27 @@
 
 
 // 2 - Promises 
-getUserWithPromise(1)
-    .then(user => getRepoWithPromise(user.name))
-    .then(repos => getCommitsWithPromise(repos[0]))
-    .then(commits => console.log('Commits: ', commits))
-    .catch(err => console.log('Error: ', err.message)); // This handler will catch all the errors in the chain
+// getUserWithPromise(1)
+//     .then(user => getRepoWithPromise(user.name))
+//     .then(repos => getCommitsWithPromise(repos[0]))
+//     .then(commits => console.log('Commits: ', commits))
+//     .catch(err => console.log('Error: ', err.message)); // This handler will catch all the errors in the chain
 
-function getUserWithPromise(id){
+
+// 3 - Async and Await approach
+async function displayCommits() {
+    try {
+        const user = await getUserWithPromise(1);
+        const repos = await getRepoWithPromise(user.name);
+        const commits = await getCommitsWithPromise(repos[1]);
+        console.log(commits);
+    } catch (err) {
+        console.log('ERROR: ', err.message);
+    }
+}
+displayCommits();
+
+function getUserWithPromise(id) {
     return new Promise((resolve, reject) => {
         setTimeout(() => {
             console.log("Waiting for 2 sec to get user ~~");
@@ -50,16 +69,15 @@ function getUserWithPromise(id){
         }, 2000);
     });
 }
-
-function getRepoWithPromise(name){
+function getRepoWithPromise(name) {
     return new Promise((resolve, reject) => {
         setTimeout(() => {
             console.log("Waiting for 2 sec to get repo ~~");
-            resolve(['repo1', 'repo2', 'repo3']);
+            // resolve(['repo1', 'repo2', 'repo3']);
+            reject(new Error("Error getting repo."));
         }, 2000);
     });
 }
-
 function getCommitsWithPromise(repos) {
     return new Promise((resolve, reject) => {
         setTimeout(() => {
@@ -68,23 +86,16 @@ function getCommitsWithPromise(repos) {
         }, 2000);
     });
 }
-
-
-// 3 ways to handle Asynchronous code
-// - Callbacks
-// - Promises
-// - Async/Await
-function getUser(id, callback){
+function getUser(id, callback) {
     setTimeout(() => {
         console.log("Reading from db .. 2 sec!");
         callback({
-            id: id, 
+            id: id,
             name: 'cutie'
         });
     }, 2000) // Schedule time 
 }
-
-function getRepo(name, callback){
+function getRepo(name, callback) {
     setTimeout(() => {
         callback(['repo1', 'repo2', 'repo3']);
     }, 2000)
