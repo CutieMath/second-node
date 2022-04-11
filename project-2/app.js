@@ -48,7 +48,8 @@
 // 3 - Async and Await approach
 async function displayCommits() {
     try {
-        const user = await getUserWithPromise(1);
+        // Syntax sugar, it's still the same with the chaining approach above
+        const user = await getUserWithPromise(1); // A thread is released to do other work once this is called
         const repos = await getRepoWithPromise(user.name);
         const commits = await getCommitsWithPromise(repos[1]);
         console.log(commits);
